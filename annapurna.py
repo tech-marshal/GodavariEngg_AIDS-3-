@@ -68,8 +68,10 @@ class SignUP:
                         print("-----------------------------------------------------------------------")
 
 class Order:
+    finalbill = 0.0
     def userOrder(self):
         bill = 0.0
+        self.finalbill = bill
         print("---------------------------------------")
         while True:
                     print("--- Food Category ---")
@@ -190,12 +192,59 @@ class Order:
                         case 3:
                             print("--- VISIT AGAIN | THANK YOU ---")
                             break
-s = SignUP()
-o = Order()
 
-s.userINFO()
-s.userLogin()
-o.userOrder()
+class Payment(Order,SignUP): # --> Single level inheritance
+    
+    def userpayment(self):
+        otp = 4901
+        print("---------------------------------------")
+        print("1. Offline")
+        print("2. Online")
+        print("---------------------------------------")
+        userChoice = int(input("Enter choice : "))
+        print("---------------------------------------")
+        match(userChoice):
+            case 1:
+                print(f"hello {self.first_name} you choosen the offline mode...")
+                print("---------------------------------------")
+                print("total bill : ",self.finalbill)
+                print("---------------------------------------")
+                print(f"your order will placed at {self.user_address} this address...")
+                print("thank you... oder again we will waiting...")
+                print("---------------------------------------")
+            case 2:
+                otp  = otp + 17
+                UPIPIN = 9890
+                print("---------------------------------------")
+                Payment_mobile = int(input("Enter mobile number for online payment gateway : "))
+                print("---------------------------------------")
+                user_otp = int(input(f"please enter otp that you received at {Payment_mobile} : "))
+                if user_otp == otp:
+                    print("---------------------------------------")
+                    user_upi = int(input("Enter your UPI pin : "))
+                    if user_upi == UPIPIN:
+                        print("---------------------------------------")
+                        print(f"Pyment {self.finalbill} successfull... ")
+                        print(f"your order placed at {self.user_address}")
+                        print("---------------------------------------")
+                        print("--- thank you ---")
+                    else:
+                        print("---------------------------------------")
+                        print("Invalid UPI ID please try again")
+                else:
+                    print("---------------------------------------")
+                    print("invalid otp")
+                    print("---------------------------------------")
+
+p = Payment()
+p.userINFO()
+p.userLogin()
+p.userOrder()
+p.userpayment()
+
+                
+
+    
 
                                 
 
